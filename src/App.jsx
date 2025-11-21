@@ -5,13 +5,12 @@ import { MoviesList } from './components/MoviesList';
 import moviesFromServer from './api/movies.json';
 
 const getPrepaidedMovies = (movies, { query }) => {
-  const prepairedMovies = [...movies];
-
-  if (query) {
-    return prepairedMovies.filter(movie => movie.toLowerCase().includes(query));
+  if (!query) {
+    return movies;
   }
 
-  return moviesFromServer;
+  const q = query.toLowerCase();
+  return movies.filter(movie => movie.title.toLowerCase().includes(q));
 };
 
 export const App = () => {
