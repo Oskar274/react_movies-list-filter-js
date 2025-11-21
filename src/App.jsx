@@ -9,8 +9,15 @@ const getPrepaidedMovies = (movies, { query }) => {
     return movies;
   }
 
-  const q = query.toLowerCase();
-  return movies.filter(movie => movie.title.toLowerCase().includes(q));
+  const lowerCaseQuery = query.toLowerCase().trim();
+
+  return movies.filter(movie => {
+    const title = movie.title.toLowerCase();
+    const description = movie.description.toLowerCase();
+
+    return title.includes(lowerCaseQuery)
+      || description.includes(lowerCaseQuery);
+  });
 };
 
 export const App = () => {
